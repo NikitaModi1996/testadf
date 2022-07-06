@@ -1,0 +1,9 @@
+{
+	"name": "dp-datafactory-uswest2",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c519e7c2-84d1-4966-880c-1aac49554cda",
+		"tenantId": "42f7676c-f455-423c-82f6-dc2d99791af7"
+	}
+}
