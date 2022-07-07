@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "OutputData",
+						"referenceName": "InputData",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -36,7 +36,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> source1"
 			]
 		}
 	}
