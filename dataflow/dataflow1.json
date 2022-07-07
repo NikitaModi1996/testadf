@@ -45,7 +45,7 @@
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 derive(each(match(name=='DESCRIPTION'), $$ = lower($$))) ~> derivedColumn1",
-				"derivedColumn1 derive(DESCRIPTION = regexReplace(DESCRIPTION, \"[^a-zA-Z]+\", \"\") ) ~> derivedColumn2"
+				"derivedColumn1 derive(DESCRIPTION = regexReplace(DESCRIPTION, \"[^a-zA-Z]+\", \" \") ) ~> derivedColumn2"
 			]
 		}
 	}
