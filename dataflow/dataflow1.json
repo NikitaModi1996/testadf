@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "InputData",
-						"type": "DatasetReference"
-					},
 					"name": "source1"
 				}
 			],
@@ -36,7 +32,6 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false,",
 				"     partitionBy('hash', 1)) ~> source1"
 			]
 		}
