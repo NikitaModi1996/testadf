@@ -1,0 +1,43 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "InputData",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          HASH as string,",
+				"          TITLE as string,",
+				"          COMPANY_ID as string,",
+				"          COMPANY_NAME as string,",
+				"          CITY as string,",
+				"          STATE as string,",
+				"          ZIP as string,",
+				"          COUNTRY as string,",
+				"          CREATED as string,",
+				"          LAST_CHECKED as string,",
+				"          LAST_UPDATED as string,",
+				"          DELETE_DATE as string,",
+				"          UNMAPPED_LOCATION as string,",
+				"          ONET_OCCUPATION_CODE as string,",
+				"          URL as string,",
+				"          DESCRIPTION as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> source1"
+			]
+		}
+	}
+}
