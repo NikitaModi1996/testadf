@@ -41,8 +41,7 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 derive(column1 = ERROR_FUNCTION(''),",
-				"          each(match(), ERROR_FUNCTION('') = ERROR_FUNCTION(''))) ~> derivedColumn1"
+				"source1 derive(each(match(name=='DESCRIPTION'), $$ = lower($$))) ~> derivedColumn1"
 			]
 		}
 	}
