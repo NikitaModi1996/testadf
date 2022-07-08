@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "JOB_INFO_T",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  JOB_INFO_T",
+					"dataset": {
+						"referenceName": "JOB_INFO_T",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared JOB_INFO_T = let AdfDoc = AzureStorage.BlobContents(\"https://pfsdpstorage.blob.core.windows.net/dp-datafactory/InputData/EC_EMP_JOB_INFO_T.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"JOB_INFO_T\",\r\n  #\"Changed column type\" = Table.TransformColumnTypes(Source, {{\"EMPLOYEE_ID\", Int64.Type}}),\r\n  #\"Removed errors\" = Table.RemoveRowsWithErrors(#\"Changed column type\", {\"EMPLOYEE_ID\"}),\r\n  #\"Added custom\" = Table.AddColumn(#\"Removed errors\", \"New_JOB_TITLE\", each Text.Select([JOB_TITLE],{\"A\"..\"z\",\"0\"..\"9\"})),\r\n  #\"Removed columns\" = Table.RemoveColumns(#\"Added custom\", {\"JOB_TITLE\"}),\r\n  #\"Removed blank rows\" = Table.SelectRows(#\"Removed columns\", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {\"\", null}))) in #\"Removed blank rows\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
