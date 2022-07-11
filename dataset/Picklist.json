@@ -1,0 +1,45 @@
+{
+	"name": "Picklist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EC_PickList.csv",
+				"folderPath": "InputData",
+				"container": "dp-datafactory"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "OPTIONID",
+				"type": "String"
+			},
+			{
+				"name": "PICKLISTID",
+				"type": "String"
+			},
+			{
+				"name": "STATUS",
+				"type": "String"
+			},
+			{
+				"name": "EXTERNAL_CODE",
+				"type": "String"
+			},
+			{
+				"name": "OPTVALUE",
+				"type": "String"
+			}
+		]
+	}
+}
