@@ -9,14 +9,14 @@
 						"referenceName": "JOB_INFO_T",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "source11"
 				},
 				{
 					"dataset": {
 						"referenceName": "Picklist",
 						"type": "DatasetReference"
 					},
-					"name": "source2"
+					"name": "source21"
 				}
 			],
 			"sinks": [
@@ -81,7 +81,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source1",
+				"     ignoreNoFilesFound: false) ~> source11",
 				"source(output(",
 				"          OPTIONID as string,",
 				"          PICKLISTID as string,",
@@ -92,14 +92,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source2",
-				"source1, source2 join(EVENT == OPTIONID,",
+				"     ignoreNoFilesFound: false) ~> source21",
+				"source11, source21 join(EVENT == OPTIONID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
 				"join1 derive(EMPLOYEE_ID = regexReplace(EMPLOYEE_ID, \"[a-zA-Z]+\",\"NA\")) ~> EMPLOYEEID",
-				"EMPLOYEEID alterRow(deleteIf(EMPLOYEE_ID == \"NA\")) ~> EMPID",
+				"EMPLOYEEID alterRow(deleteIf(EMPLOYEE_ID==\"NA\")) ~> EMPID",
 				"EMPID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
