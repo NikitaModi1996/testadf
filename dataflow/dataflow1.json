@@ -36,10 +36,10 @@
 					"name": "EMPLOYEEID"
 				},
 				{
-					"name": "EMPID"
+					"name": "JOBTITLE"
 				},
 				{
-					"name": "JOBTITLE"
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -102,8 +102,8 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
 				"join1 derive(EMPLOYEE_ID = regexReplace(EMPLOYEE_ID, \"[a-zA-Z]+\",\"NA\")) ~> EMPLOYEEID",
-				"EMPLOYEEID alterRow(deleteIf(EMPLOYEE_ID==\"NA\")) ~> EMPID",
-				"EMPID derive(JOB_TITLE = regexReplace(JOB__TITLE, \"![0-9a-zA-Z,&]+\",\"NA\")) ~> JOBTITLE",
+				"filter1 derive(JOB_TITLE = regexReplace(JOB_TITLE, \"![0-9a-zA-Z,&]+\",\"NA\")) ~> JOBTITLE",
+				"EMPLOYEEID filter(EMPLOYEE_ID!=\"NA\") ~> filter1",
 				"JOBTITLE sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
