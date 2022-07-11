@@ -36,7 +36,7 @@
 					"name": "EMPLOYEEID"
 				},
 				{
-					"name": "alterRow1"
+					"name": "EMPID"
 				}
 			],
 			"scriptLines": [
@@ -99,8 +99,8 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
 				"join1 derive(EMPLOYEE_ID = regexReplace(EMPLOYEE_ID, \"[a-zA-Z]+\",\"NULL\")) ~> EMPLOYEEID",
-				"EMPLOYEEID alterRow(deleteIf(EMPLOYEE_ID==\"NULL\")) ~> alterRow1",
-				"alterRow1 sink(allowSchemaDrift: true,",
+				"EMPLOYEEID alterRow(deleteIf(EMPLOYEE_ID == \"NULL\")) ~> EMPID",
+				"EMPID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"
