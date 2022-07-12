@@ -3,7 +3,16 @@
 	"properties": {
 		"type": "WranglingDataFlow",
 		"typeProperties": {
-			"sources": []
+			"sources": [
+				{
+					"name": "OutputData",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  OutputData",
+					"dataset": {
+						"referenceName": "OutputData",
+						"type": "DatasetReference"
+					}
+				}
+			]
 		}
 	}
 }
