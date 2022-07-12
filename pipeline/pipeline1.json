@@ -29,7 +29,14 @@
 			{
 				"name": "powerquery1",
 				"type": "ExecuteWranglingDataflow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "dataflow1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
