@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "OutputDATA",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  OutputDATA",
+					"dataset": {
+						"referenceName": "OutputDATA",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared OutputDATA = let AdfDoc = AzureStorage.BlobContents(\"https://pfsdpstorage.blob.core.windows.net/dp-datafactory/OutputData/part-00000-02aa95ce-1395-408a-85fa-16ef91753b35-c000.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"OutputDATA\" in Source;\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
