@@ -13,7 +13,7 @@
 					}
 				}
 			],
-			"script": "section Section1;\r\nshared OutputData = let AdfDoc = AzureStorage.BlobContents(\"https://pfsdpstorage.blob.core.windows.net/dp-datafactory/OutputData/part-00000-f5fdd917-4546-44a0-8bdd-4cc587f3cc49-c000.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"OutputData\",\r\n  #\"Removed columns\" = Table.RemoveColumns(Source, {\"JOB_INFO_ID\"}),\r\n  #\"Sorted rows\" = Table.Sort(#\"Removed columns\", {{\"EMPLOYEE_ID\", Order.Ascending}}) in #\"Sorted rows\";\r\n",
+			"script": "section Section1;\r\nshared OutputData = let AdfDoc = AzureStorage.BlobContents(\"https://pfsdpstorage.blob.core.windows.net/dp-datafactory/OutputData/part-00000-f5fdd917-4546-44a0-8bdd-4cc587f3cc49-c000.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"OutputData\",\r\n  #\"Sorted rows\" = Table.Sort(Source, {{\"EMPLOYEE_ID\", Order.Ascending}}),\r\n  #\"Removed columns\" = Table.RemoveColumns(#\"Sorted rows\", {\"WORK_PERIOD\", \"IS_FULLTIME_EMPLOYEE\", \"FLSA_STATUS\", \"PAY_GRADE\", \"PAY_GROUP\", \"PAY_SCALE_GROUP\", \"PAY_SCALE_LEVEL\", \"PAY_SCALE_TYPE\", \"IS_SHIFT_EMPLOYEE\", \"TRANSACTION_SEQUENCE_NUMBER\", \"EMPLOYMENT_STATUS\", \"MANAGER_ID\", \"POSITION_ID\", \"POSITION_ENTRY_DATE\", \"JOB_ENTRY_DATE\", \"PICKLISTID\", \"OPTIONID\", \"STATUS\", \"OPTVALUE\"}) in #\"Removed columns\";\r\n",
 			"documentLocale": "en-us"
 		}
 	}

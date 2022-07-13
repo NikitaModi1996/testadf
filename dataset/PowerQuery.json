@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "PowerQuery",
+				"folderPath": "Powerq",
 				"container": "dp-datafactory"
 			},
 			"columnDelimiter": ",",
