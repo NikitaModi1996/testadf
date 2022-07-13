@@ -1,0 +1,188 @@
+{
+	"name": "Movement",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "OutputData",
+				"container": "dp-datafactory"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "JOB_INFO_ID",
+				"type": "String"
+			},
+			{
+				"name": "EMPLOYEE_ID",
+				"type": "String"
+			},
+			{
+				"name": "JOB_TITLE",
+				"type": "String"
+			},
+			{
+				"name": "JOB_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EMPLOYEE_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "DEPARTMENT",
+				"type": "String"
+			},
+			{
+				"name": "DIVISION",
+				"type": "String"
+			},
+			{
+				"name": "JOB_LOCATION",
+				"type": "String"
+			},
+			{
+				"name": "EFFECTIVE_START_DATE",
+				"type": "String"
+			},
+			{
+				"name": "EFFECTIVE_END_DATE",
+				"type": "String"
+			},
+			{
+				"name": "COMPANY",
+				"type": "String"
+			},
+			{
+				"name": "BUSINESS_UNIT",
+				"type": "String"
+			},
+			{
+				"name": "COST_CENTER",
+				"type": "String"
+			},
+			{
+				"name": "EMPLOYEE_CLASS",
+				"type": "String"
+			},
+			{
+				"name": "EMPLOYMENT_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "FTE",
+				"type": "String"
+			},
+			{
+				"name": "REGULAR_TEMP",
+				"type": "String"
+			},
+			{
+				"name": "STANDARD_HOURS",
+				"type": "String"
+			},
+			{
+				"name": "WORK_PERIOD",
+				"type": "String"
+			},
+			{
+				"name": "IS_FULLTIME_EMPLOYEE",
+				"type": "String"
+			},
+			{
+				"name": "FLSA_STATUS",
+				"type": "String"
+			},
+			{
+				"name": "PAY_GRADE",
+				"type": "String"
+			},
+			{
+				"name": "PAY_GROUP",
+				"type": "String"
+			},
+			{
+				"name": "PAY_SCALE_AREA",
+				"type": "String"
+			},
+			{
+				"name": "PAY_SCALE_GROUP",
+				"type": "String"
+			},
+			{
+				"name": "PAY_SCALE_LEVEL",
+				"type": "String"
+			},
+			{
+				"name": "PAY_SCALE_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "IS_SHIFT_EMPLOYEE",
+				"type": "String"
+			},
+			{
+				"name": "TRANSACTION_SEQUENCE_NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "EVENT",
+				"type": "String"
+			},
+			{
+				"name": "EVENT_REASON_ICODE",
+				"type": "String"
+			},
+			{
+				"name": "EMPLOYMENT_STATUS",
+				"type": "String"
+			},
+			{
+				"name": "MANAGER_ID",
+				"type": "String"
+			},
+			{
+				"name": "POSITION_ID",
+				"type": "String"
+			},
+			{
+				"name": "POSITION_ENTRY_DATE",
+				"type": "String"
+			},
+			{
+				"name": "JOB_ENTRY_DATE",
+				"type": "String"
+			},
+			{
+				"name": "OPTIONID",
+				"type": "String"
+			},
+			{
+				"name": "PICKLISTID",
+				"type": "String"
+			},
+			{
+				"name": "STATUS",
+				"type": "String"
+			},
+			{
+				"name": "EXTERNAL_CODE",
+				"type": "String"
+			},
+			{
+				"name": "OPTVALUE",
+				"type": "String"
+			}
+		]
+	}
+}
