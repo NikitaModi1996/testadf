@@ -114,7 +114,7 @@
 				"filter2 derive(EFFECTIVE_START_DATE = toDate(toString(substring(EFFECTIVE_START_DATE,1,8), 'yyyyMMdd'),'yyyyMMdd'),",
 				"          EFFECTIVE_END_DATE = toDate(toString(substring(EFFECTIVE_END_DATE,1,8), 'yyyyMMdd'),'yyyyMMdd')) ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
+				"     validateSchema: true,",
 				"     input(",
 				"          JOB_INFO_ID as string,",
 				"          EMPLOYEE_ID as string,",
@@ -159,8 +159,7 @@
 				"          OPTVALUE as string",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
