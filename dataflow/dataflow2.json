@@ -19,7 +19,15 @@
 					"name": "source2"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Movement",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "join1"
@@ -96,7 +104,54 @@
 				"          COMPANY",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          JOB_INFO_ID as string,",
+				"          EMPLOYEE_ID as string,",
+				"          JOB_TITLE as string,",
+				"          JOB_CODE as string,",
+				"          EMPLOYEE_TYPE as string,",
+				"          DEPARTMENT as string,",
+				"          DIVISION as string,",
+				"          JOB_LOCATION as string,",
+				"          EFFECTIVE_START_DATE as string,",
+				"          EFFECTIVE_END_DATE as string,",
+				"          COMPANY as string,",
+				"          BUSINESS_UNIT as string,",
+				"          COST_CENTER as string,",
+				"          EMPLOYEE_CLASS as string,",
+				"          EMPLOYMENT_TYPE as string,",
+				"          FTE as string,",
+				"          REGULAR_TEMP as string,",
+				"          STANDARD_HOURS as string,",
+				"          WORK_PERIOD as string,",
+				"          IS_FULLTIME_EMPLOYEE as string,",
+				"          FLSA_STATUS as string,",
+				"          PAY_GRADE as string,",
+				"          PAY_GROUP as string,",
+				"          PAY_SCALE_AREA as string,",
+				"          PAY_SCALE_GROUP as string,",
+				"          PAY_SCALE_LEVEL as string,",
+				"          PAY_SCALE_TYPE as string,",
+				"          IS_SHIFT_EMPLOYEE as string,",
+				"          TRANSACTION_SEQUENCE_NUMBER as string,",
+				"          EVENT as string,",
+				"          EVENT_REASON_ICODE as string,",
+				"          EMPLOYMENT_STATUS as string,",
+				"          MANAGER_ID as string,",
+				"          POSITION_ID as string,",
+				"          POSITION_ENTRY_DATE as string,",
+				"          JOB_ENTRY_DATE as string,",
+				"          OPTIONID as string,",
+				"          PICKLISTID as string,",
+				"          STATUS as string,",
+				"          EXTERNAL_CODE as string,",
+				"          OPTVALUE as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
