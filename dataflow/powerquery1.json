@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"name": "OutputData",
-					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tignoreNoFilesFound: false) ~>  OutputData",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tignoreNoFilesFound: false,\n\tpurgeFiles: true) ~>  OutputData",
 					"dataset": {
 						"referenceName": "OutputData",
 						"type": "DatasetReference"
