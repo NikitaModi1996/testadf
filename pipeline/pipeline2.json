@@ -46,9 +46,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "powerquery1",
+						"type": "DataFlowReference"
+					},
 					"compute": {
 						"coreCount": 8,
-						"computeType": "MemoryOptimized"
+						"computeType": "General"
 					},
 					"queries": [
 						{

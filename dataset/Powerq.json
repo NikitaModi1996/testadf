@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "part-00000-533ded10-03b0-4531-89f5-b3fee51a5e2c-c000.csv",
 				"folderPath": "Powerq",
 				"container": "dp-datafactory"
 			},
