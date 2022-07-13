@@ -1,0 +1,61 @@
+{
+	"name": "Event_Code",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EC_FO_EVENT_REASON_T.csv",
+				"folderPath": "InputData",
+				"container": "dp-datafactory"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "OBJECT_ID",
+				"type": "String"
+			},
+			{
+				"name": "INTERNAL_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EFFECTIVE_START_DATE",
+				"type": "String"
+			},
+			{
+				"name": "EFFECTIVE_END_DATE",
+				"type": "String"
+			},
+			{
+				"name": "EFFECTIVE_STATUS",
+				"type": "String"
+			},
+			{
+				"name": "CODE",
+				"type": "String"
+			},
+			{
+				"name": "OBJECT_NAME",
+				"type": "String"
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "String"
+			},
+			{
+				"name": "EVENT",
+				"type": "String"
+			}
+		]
+	}
+}
