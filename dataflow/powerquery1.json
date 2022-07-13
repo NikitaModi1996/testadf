@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "OutputData",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  OutputData",
+					"dataset": {
+						"referenceName": "OutputData",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared OutputData = let AdfDoc = AzureStorage.BlobContents(\"https://pfsdpstorage.blob.core.windows.net/dp-datafactory/OutputData/part-00000-f5fdd917-4546-44a0-8bdd-4cc587f3cc49-c000.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"OutputData\",\r\n  #\"Removed columns\" = Table.RemoveColumns(Source, {\"JOB_INFO_ID\"}),\r\n  #\"Sorted rows\" = Table.Sort(#\"Removed columns\", {{\"EMPLOYEE_ID\", Order.Ascending}}) in #\"Sorted rows\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
