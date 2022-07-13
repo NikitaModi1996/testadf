@@ -5,10 +5,6 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "PowerQuery",
-						"type": "DatasetReference"
-					},
 					"name": "source1"
 				},
 				{
@@ -27,8 +23,7 @@
 			],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1",
+				"     validateSchema: false) ~> source1",
 				"source(output(",
 				"          OBJECT_ID as string,",
 				"          INTERNAL_CODE as string,",

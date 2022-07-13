@@ -3,6 +3,30 @@
 	"properties": {
 		"activities": [
 			{
+				"name": "dataflow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow1",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
 				"name": "powerquery1",
 				"type": "ExecuteWranglingDataflow",
 				"dependsOn": [
@@ -28,47 +52,23 @@
 					},
 					"compute": {
 						"coreCount": 8,
-						"computeType": "General"
+						"computeType": "MemoryOptimized"
 					},
 					"queries": [
 						{
 							"queryName": "UserQuery",
 							"dataflowSinks": [
 								{
-									"name": "UserQueryPowerQuery",
+									"name": "UserQueryPowerq",
 									"dataset": {
-										"referenceName": "PowerQuery",
+										"referenceName": "Powerq",
 										"type": "DatasetReference"
 									},
-									"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> UserQueryPowerQuery"
+									"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> UserQueryPowerq"
 								}
 							]
 						}
 					]
-				}
-			},
-			{
-				"name": "dataflow1",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "dataflow1",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
 				}
 			}
 		],
