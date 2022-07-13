@@ -111,7 +111,8 @@
 				"filter1 derive(JOB_TITLE = regexReplace(JOB_TITLE, \"[^\\u0000-\\u007F]+\", \"NA\")) ~> JOBTITLE",
 				"EMPLOYEEID filter(EMPLOYEE_ID!=\"NA\") ~> filter1",
 				"JOBTITLE filter(JOB_TITLE!=\"NA\") ~> filter2",
-				"filter2 derive(EFFECTIVE_START_DATE = toDate(toString(substring(EFFECTIVE_START_DATE,1,8), 'yyyyMMdd'),'yyyyMMdd')) ~> derivedColumn1",
+				"filter2 derive(EFFECTIVE_START_DATE = toDate(toString(substring(EFFECTIVE_START_DATE,1,8), 'yyyyMMdd'),'yyyyMMdd'),",
+				"          EFFECTIVE_END_DATE = toDate(toString(substring(EFFECTIVE_END_DATE,1,8), 'yyyyMMdd'),'yyyyMMdd')) ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -157,10 +158,8 @@
 				"          EXTERNAL_CODE as string,",
 				"          OPTVALUE as string",
 				"     ),",
-				"     dateFormat:'yyyy-mm-dd',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
