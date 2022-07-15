@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "part-00000-32d11a64-03db-429b-9e33-8a1e70c9dc62-c000.csv",
 				"folderPath": "OutputData",
 				"container": "dp-datafactory"
 			},

@@ -41,6 +41,12 @@
 				{
 					"name": "MapDrifted1",
 					"description": "Creates an explicit mapping for each drifted column"
+				},
+				{
+					"name": "duplicate"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -112,7 +118,18 @@
 				"          POSITION_ID = toDouble(byName('POSITION_ID')),",
 				"          POSITION_ENTRY_DATE = toDate(byName('POSITION_ENTRY_DATE')),",
 				"          OPTVALUE = toShort(byName('OPTVALUE'))) ~> MapDrifted1",
-				"select1 sink(allowSchemaDrift: true,",
+				"select1 aggregate(groupBy(EMPLOYEE_ID,",
+				"          EFFECTIVE_START_DATE,",
+				"          EFFECTIVE_END_DATE,",
+				"          {Movement Type},",
+				"          {Movement Reason Type},",
+				"          JOB_TITLE,",
+				"          POSITION_ID,",
+				"          DEPARTMENT,",
+				"          MANAGER_ID),",
+				"     count = count()) ~> duplicate",
+				"duplicate derive(count = count<1) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          JOB_INFO_ID as string,",
