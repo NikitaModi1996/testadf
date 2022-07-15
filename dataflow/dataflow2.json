@@ -37,6 +37,10 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "MapDrifted1",
+					"description": "Creates an explicit mapping for each drifted column"
 				}
 			],
 			"scriptLines": [
@@ -89,9 +93,8 @@
 				"     broadcast: 'auto')~> join1",
 				"join1 derive(EXTERNAL_CODE = case(EXTERNAL_CODE == 'H' || EXTERNAL_CODE == 'R', 'Hire', \r",
 				"EXTERNAL_CODE == '8' || EXTERNAL_CODE == '4' || EXTERNAL_CODE == '6', 'Internal Movement', \r",
-				"EXTERNAL_CODE == '26', 'Termination', ' ')\r",
-				") ~> MovementType",
-				"MovementType select(mapColumn(",
+				"EXTERNAL_CODE == '26', 'Termination', ' ')) ~> MovementType",
+				"MapDrifted1 select(mapColumn(",
 				"          EMPLOYEE_ID,",
 				"          EFFECTIVE_START_DATE = source1@EFFECTIVE_START_DATE,",
 				"          EFFECTIVE_END_DATE = source1@EFFECTIVE_END_DATE,",
@@ -99,12 +102,16 @@
 				"          {Movement Reason Type} = OBJECT_NAME,",
 				"          JOB_TITLE,",
 				"          DEPARTMENT,",
-				"          DIVISION,",
-				"          JOB_LOCATION,",
-				"          COMPANY",
+				"          POSITION_ID,",
+				"          MANAGER_ID",
 				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> select1",
+				"MovementType derive(IS_FULLTIME_EMPLOYEE = toBoolean(byName('IS_FULLTIME_EMPLOYEE')),",
+				"          MANAGER_ID = toString(byName('MANAGER_ID')),",
+				"          POSITION_ID = toDouble(byName('POSITION_ID')),",
+				"          POSITION_ENTRY_DATE = toDate(byName('POSITION_ENTRY_DATE')),",
+				"          OPTVALUE = toShort(byName('OPTVALUE'))) ~> MapDrifted1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
