@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "part-merged.csv",
 				"folderPath": "Powerq",
 				"container": "dp-datafactory"
 			},
