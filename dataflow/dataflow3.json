@@ -17,6 +17,18 @@
 				{
 					"name": "MapDrifted1",
 					"description": "Creates an explicit mapping for each drifted column"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "HireDate"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "TerminationDate"
 				}
 			],
 			"scriptLines": [
@@ -68,7 +80,14 @@
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 derive({Movement Type} = toString(byName('Movement Type')),",
-				"          {Movement Reason Type} = toString(byName('Movement Reason Type'))) ~> MapDrifted1"
+				"          {Movement Reason Type} = toString(byName('Movement Reason Type'))) ~> MapDrifted1",
+				"MapDrifted1 derive({Hire Date} = EFFECTIVE_START_DATE) ~> derivedColumn1",
+				"derivedColumn1 derive({Hire Date} = case({Movement Type}==\"Hire\",EFFECTIVE_START_DATE,toString(null()))\r",
+				") ~> HireDate",
+				"HireDate window(over(EMPLOYEE_ID),",
+				"     asc(EMPLOYEE_ID, true),",
+				"     {Hire Date} =  last({Hire Date}, true())) ~> window1",
+				"window1 derive() ~> TerminationDate"
 			]
 		}
 	}
