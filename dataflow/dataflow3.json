@@ -12,7 +12,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SOP_HeadCount",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "MapDrifted1",
@@ -91,7 +99,22 @@
 				"     asc(EMPLOYEE_ID, true),",
 				"     {Hire Date} =  last({Hire Date}, true())) ~> window1",
 				"window1 derive(TerminationDate = case({Movement Type}==\"Termination\",EFFECTIVE_END_DATE)) ~> TerminationDate",
-				"TerminationDate derive({SOP HC} = iif({Hire Date} < EFFECTIVE_START_DATE || ({Movement Type} == 'Termination' && EFFECTIVE_END_DATE>= EFFECTIVE_START_DATE), 1, 0)) ~> SOPHeadCount"
+				"TerminationDate derive({SOP HC} = iif({Hire Date} < EFFECTIVE_START_DATE || ({Movement Type} == 'Termination' && EFFECTIVE_END_DATE>= EFFECTIVE_START_DATE), 1, 0)) ~> SOPHeadCount",
+				"SOPHeadCount sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EMPLOYEE_ID as string,",
+				"          EFFECTIVE_START_DATE as string,",
+				"          EFFECTIVE_END_DATE as string,",
+				"          {Movement Type} as string,",
+				"          {Movement Reason Type} as string,",
+				"          JOB_TITLE as string,",
+				"          DEPARTMENT as string,",
+				"          POSITION_ID as string,",
+				"          MANAGER_ID as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}

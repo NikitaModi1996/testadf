@@ -1,0 +1,60 @@
+{
+	"name": "SOP_HeadCount",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "OutputData",
+				"container": "dp-datafactory"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EMPLOYEE_ID",
+				"type": "String"
+			},
+			{
+				"name": "EFFECTIVE_START_DATE",
+				"type": "String"
+			},
+			{
+				"name": "EFFECTIVE_END_DATE",
+				"type": "String"
+			},
+			{
+				"name": "Movement Type",
+				"type": "String"
+			},
+			{
+				"name": "Movement Reason Type",
+				"type": "String"
+			},
+			{
+				"name": "JOB_TITLE",
+				"type": "String"
+			},
+			{
+				"name": "DEPARTMENT",
+				"type": "String"
+			},
+			{
+				"name": "POSITION_ID",
+				"type": "String"
+			},
+			{
+				"name": "MANAGER_ID",
+				"type": "String"
+			}
+		]
+	}
+}
