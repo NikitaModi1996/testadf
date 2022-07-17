@@ -29,6 +29,9 @@
 				},
 				{
 					"name": "TerminationDate"
+				},
+				{
+					"name": "SOPHeadCount"
 				}
 			],
 			"scriptLines": [
@@ -87,7 +90,8 @@
 				"HireDate window(over(EMPLOYEE_ID),",
 				"     asc(EMPLOYEE_ID, true),",
 				"     {Hire Date} =  last({Hire Date}, true())) ~> window1",
-				"window1 derive() ~> TerminationDate"
+				"window1 derive(TerminationDate = case({Movement Type}==\"Termination\",EFFECTIVE_END_DATE)) ~> TerminationDate",
+				"TerminationDate derive({SOP HC} = iif({Hire Date} < EFFECTIVE_START_DATE || ({Movement Type} == 'Termination' && EFFECTIVE_END_DATE>= EFFECTIVE_START_DATE), 1, 0)) ~> SOPHeadCount"
 			]
 		}
 	}
