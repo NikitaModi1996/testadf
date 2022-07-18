@@ -176,7 +176,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     partitionBy('roundRobin', 2)) ~> sink1"
 			]
 		}
 	}
