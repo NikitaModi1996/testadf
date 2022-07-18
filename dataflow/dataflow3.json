@@ -93,11 +93,10 @@
 				"source1 derive({Movement Type} = toString(byName('Movement Type')),",
 				"          {Movement Reason Type} = toString(byName('Movement Reason Type'))) ~> MapDrifted1",
 				"MapDrifted1 derive({Hire Date} = EFFECTIVE_START_DATE) ~> derivedColumn1",
-				"derivedColumn1 derive({Hire Date} = case({Movement Type}==\"Hire\",EFFECTIVE_START_DATE,toString(null()))\r",
-				") ~> HireDate",
+				"derivedColumn1 derive({Hire Date} = case({Movement Type}==\"Hire\",EFFECTIVE_START_DATE,toString(null()))) ~> HireDate",
 				"HireDate window(over(EMPLOYEE_ID),",
 				"     asc(EMPLOYEE_ID, true),",
-				"     {Hire Date} =  last({Hire Date}, true())) ~> window1",
+				"     {Hire Date} = last({Hire Date}, true())) ~> window1",
 				"window1 derive(TerminationDate = case({Movement Type}==\"Termination\",EFFECTIVE_END_DATE)) ~> TerminationDate",
 				"TerminationDate derive({SOP HC} = iif({Hire Date} < EFFECTIVE_START_DATE || ({Movement Type} == 'Termination' && EFFECTIVE_END_DATE>= EFFECTIVE_START_DATE), 1, 0)) ~> SOPHeadCount",
 				"SOPHeadCount sink(allowSchemaDrift: true,",
@@ -114,7 +113,8 @@
 				"          MANAGER_ID as string",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
