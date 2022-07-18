@@ -176,7 +176,9 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('roundRobin', 2)) ~> sink1"
+				"     partitionBy('hash', 2,",
+				"          EMPLOYEE_ID",
+				"     )) ~> sink1"
 			]
 		}
 	}
