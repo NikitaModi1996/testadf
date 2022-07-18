@@ -132,7 +132,8 @@
 				"          MANAGER_ID),",
 				"     count = count()) ~> duplicate",
 				"duplicate derive(count = count<1) ~> derivedColumn1",
-				"derivedColumn1 sort(asc(EMPLOYEE_ID, true)) ~> sort1",
+				"derivedColumn1 sort(asc(EMPLOYEE_ID, false),",
+				"     partitionLevel: true) ~> sort1",
 				"sort1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -179,7 +180,8 @@
 				"          OPTVALUE as string",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
