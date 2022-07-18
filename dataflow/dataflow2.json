@@ -175,7 +175,16 @@
 				"          OPTVALUE as string",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          EMPLOYEE_ID,",
+				"          JOB_TITLE,",
+				"          DEPARTMENT,",
+				"          EFFECTIVE_START_DATE,",
+				"          EFFECTIVE_END_DATE,",
+				"          MANAGER_ID,",
+				"          POSITION_ID",
+				"     )) ~> sink1"
 			]
 		}
 	}
