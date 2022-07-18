@@ -115,6 +115,18 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          EMPLOYEE_ID,",
+				"          EFFECTIVE_START_DATE,",
+				"          EFFECTIVE_END_DATE,",
+				"          {Movement Type},",
+				"          {Movement Reason Type},",
+				"          JOB_TITLE,",
+				"          DEPARTMENT,",
+				"          POSITION_ID,",
+				"          MANAGER_ID,",
+				"          {SOP HC}",
+				"     ),",
 				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
