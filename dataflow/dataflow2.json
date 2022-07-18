@@ -184,7 +184,8 @@
 				"          EFFECTIVE_END_DATE,",
 				"          MANAGER_ID,",
 				"          POSITION_ID",
-				"     )) ~> sink1"
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
