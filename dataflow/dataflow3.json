@@ -40,6 +40,12 @@
 				},
 				{
 					"name": "SOPHeadCount"
+				},
+				{
+					"name": "EOPHeadcount"
+				},
+				{
+					"name": "AvgHc"
 				}
 			],
 			"scriptLines": [
@@ -99,8 +105,10 @@
 				"     asc(EMPLOYEE_ID, true),",
 				"     {Hire Date} = last({Hire Date}, true())) ~> window1",
 				"window1 derive(TerminationDate = case({Movement Type}==\"Termination\",EFFECTIVE_END_DATE)) ~> TerminationDate",
-				"TerminationDate derive({SOP HC} = iif({Hire Date} < EFFECTIVE_START_DATE || ({Movement Type} == 'Termination' && EFFECTIVE_END_DATE>= EFFECTIVE_START_DATE), 1, 0)) ~> SOPHeadCount",
-				"SOPHeadCount sink(allowSchemaDrift: true,",
+				"TerminationDate derive({SOP HC} = iif({Hire Date} < EFFECTIVE_START_DATE || ({Movement Type} == 'Termination' && {TerminationDate}>= EFFECTIVE_START_DATE), 1, 0)) ~> SOPHeadCount",
+				"SOPHeadCount derive({EOP Head count} = iif({Hire Date} <= EFFECTIVE_END_DATE || ({Movement Type} == 'Termination' && {TerminationDate}>EFFECTIVE_END_DATE), 1, 0)) ~> EOPHeadcount",
+				"EOPHeadcount derive({Avg Hc} = abs(minus(toDate(EFFECTIVE_START_DATE), toDate(EFFECTIVE_END_DATE)))) ~> AvgHc",
+				"AvgHc sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          EMPLOYEE_ID as string,",
