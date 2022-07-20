@@ -1,166 +1,20 @@
 {
-	"name": "DataCleaning",
+	"name": "powerquery1",
 	"properties": {
-		"type": "MappingDataFlow",
+		"type": "WranglingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "JOB_INFO_T",
-						"type": "DatasetReference"
-					},
-					"name": "source11"
-				},
-				{
-					"dataset": {
-						"referenceName": "Picklist",
-						"type": "DatasetReference"
-					},
-					"name": "source21"
-				}
-			],
-			"sinks": [
-				{
+					"name": "OutputData",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  OutputData",
 					"dataset": {
 						"referenceName": "OutputData",
 						"type": "DatasetReference"
-					},
-					"name": "sink1"
+					}
 				}
 			],
-			"transformations": [
-				{
-					"name": "join1"
-				},
-				{
-					"name": "EMPLOYEEID"
-				},
-				{
-					"name": "JOBTITLE"
-				},
-				{
-					"name": "filter1"
-				},
-				{
-					"name": "filter2"
-				},
-				{
-					"name": "derivedColumn1"
-				}
-			],
-			"scriptLines": [
-				"source(output(",
-				"          JOB_INFO_ID as string,",
-				"          EMPLOYEE_ID as string,",
-				"          JOB_TITLE as string,",
-				"          JOB_CODE as string,",
-				"          EMPLOYEE_TYPE as string,",
-				"          DEPARTMENT as string,",
-				"          DIVISION as string,",
-				"          JOB_LOCATION as string,",
-				"          EFFECTIVE_START_DATE as string,",
-				"          EFFECTIVE_END_DATE as string,",
-				"          COMPANY as string,",
-				"          BUSINESS_UNIT as string,",
-				"          COST_CENTER as string,",
-				"          EMPLOYEE_CLASS as string,",
-				"          EMPLOYMENT_TYPE as string,",
-				"          FTE as string,",
-				"          REGULAR_TEMP as string,",
-				"          STANDARD_HOURS as string,",
-				"          WORK_PERIOD as string,",
-				"          IS_FULLTIME_EMPLOYEE as string,",
-				"          FLSA_STATUS as string,",
-				"          PAY_GRADE as string,",
-				"          PAY_GROUP as string,",
-				"          PAY_SCALE_AREA as string,",
-				"          PAY_SCALE_GROUP as string,",
-				"          PAY_SCALE_LEVEL as string,",
-				"          PAY_SCALE_TYPE as string,",
-				"          IS_SHIFT_EMPLOYEE as string,",
-				"          TRANSACTION_SEQUENCE_NUMBER as string,",
-				"          EVENT as string,",
-				"          EVENT_REASON_ICODE as string,",
-				"          EMPLOYMENT_STATUS as string,",
-				"          MANAGER_ID as string,",
-				"          POSITION_ID as string,",
-				"          POSITION_ENTRY_DATE as string,",
-				"          JOB_ENTRY_DATE as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source11",
-				"source(output(",
-				"          OPTIONID as string,",
-				"          PICKLISTID as string,",
-				"          STATUS as string,",
-				"          EXTERNAL_CODE as string,",
-				"          OPTVALUE as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source21",
-				"source11, source21 join(EVENT == OPTIONID,",
-				"     joinType:'left',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1",
-				"join1 derive(EMPLOYEE_ID = regexReplace(EMPLOYEE_ID, \"[a-zA-Z]+\",\"NA\")) ~> EMPLOYEEID",
-				"filter1 derive(JOB_TITLE = regexReplace(JOB_TITLE, \"[^\\u0000-\\u007F]+\", \"NA\")) ~> JOBTITLE",
-				"EMPLOYEEID filter(!like(EMPLOYEE_ID,\"%NA%\")) ~> filter1",
-				"JOBTITLE filter(!like(JOB_TITLE,\"%NA%\")) ~> filter2",
-				"filter2 derive(EFFECTIVE_START_DATE = toDate(toString(substring(EFFECTIVE_START_DATE,1,8), 'yyyyMMdd'),'yyyyMMdd'),",
-				"          EFFECTIVE_END_DATE = toDate(toString(substring(EFFECTIVE_END_DATE,1,8), 'yyyyMMdd'),'yyyyMMdd')) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
-				"     validateSchema: true,",
-				"     input(",
-				"          JOB_INFO_ID as string,",
-				"          EMPLOYEE_ID as string,",
-				"          JOB_TITLE as string,",
-				"          JOB_CODE as string,",
-				"          EMPLOYEE_TYPE as string,",
-				"          DEPARTMENT as string,",
-				"          DIVISION as string,",
-				"          JOB_LOCATION as string,",
-				"          EFFECTIVE_START_DATE as string,",
-				"          EFFECTIVE_END_DATE as string,",
-				"          COMPANY as string,",
-				"          BUSINESS_UNIT as string,",
-				"          COST_CENTER as string,",
-				"          EMPLOYEE_CLASS as string,",
-				"          EMPLOYMENT_TYPE as string,",
-				"          FTE as string,",
-				"          REGULAR_TEMP as string,",
-				"          STANDARD_HOURS as string,",
-				"          WORK_PERIOD as string,",
-				"          IS_FULLTIME_EMPLOYEE as string,",
-				"          FLSA_STATUS as string,",
-				"          PAY_GRADE as string,",
-				"          PAY_GROUP as string,",
-				"          PAY_SCALE_AREA as string,",
-				"          PAY_SCALE_GROUP as string,",
-				"          PAY_SCALE_LEVEL as string,",
-				"          PAY_SCALE_TYPE as string,",
-				"          IS_SHIFT_EMPLOYEE as string,",
-				"          TRANSACTION_SEQUENCE_NUMBER as string,",
-				"          EVENT as string,",
-				"          EVENT_REASON_ICODE as string,",
-				"          EMPLOYMENT_STATUS as string,",
-				"          MANAGER_ID as string,",
-				"          POSITION_ID as string,",
-				"          POSITION_ENTRY_DATE as string,",
-				"          JOB_ENTRY_DATE as string,",
-				"          OPTIONID as string,",
-				"          PICKLISTID as string,",
-				"          STATUS as string,",
-				"          EXTERNAL_CODE as string,",
-				"          OPTVALUE as string",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
-			]
+			"script": "section Section1;\r\nshared OutputData = let AdfDoc = AzureStorage.BlobContents(\"https://pfsdpstorage.blob.core.windows.net/dp-datafactory/OutputData/part-00000-c9daa2bc-b9ca-42d6-8d02-c6db83960e65-c000.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"OutputData\",\r\n  #\"Removed columns\" = Table.RemoveColumns(Source, {\"PICKLISTID\", \"JOB_ENTRY_DATE\", \"JOB_INFO_ID\", \"JOB_CODE\", \"EMPLOYEE_TYPE\", \"DIVISION\", \"JOB_LOCATION\", \"COMPANY\", \"BUSINESS_UNIT\", \"COST_CENTER\", \"EMPLOYEE_CLASS\", \"EMPLOYMENT_TYPE\", \"FTE\", \"REGULAR_TEMP\", \"STANDARD_HOURS\", \"WORK_PERIOD\", \"FLSA_STATUS\", \"PAY_GRADE\", \"PAY_GROUP\", \"PAY_SCALE_AREA\", \"PAY_SCALE_GROUP\", \"PAY_SCALE_LEVEL\", \"PAY_SCALE_TYPE\", \"IS_SHIFT_EMPLOYEE\", \"TRANSACTION_SEQUENCE_NUMBER\", \"EMPLOYMENT_STATUS\",  \"OPTIONID\", \"STATUS\"}),\r\n  #\"Sorted rows\" = Table.Sort(#\"Removed columns\", {{\"EMPLOYEE_ID\", Order.Ascending}}) in #\"Sorted rows\";\r\n",
+			"documentLocale": "en-us"
 		}
 	}
 }
