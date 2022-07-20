@@ -127,7 +127,7 @@
 				"dayOfMonth(lastDayOfMonth(toDate(EFFECTIVE_START_DATE)))+dayOfMonth(lastDayOfMonth(toDate(EFFECTIVE_END_DATE)))))\r",
 				"\r",
 				") ~> AvgHc",
-				"AvgHc derive(Month = toString(toDate(EFFECTIVE_START_DATE),\"MMMM YYYY\"),",
+				"AvgHc derive(Month = toString(toDate(EFFECTIVE_START_DATE),\"MMMM-YYYY\"),",
 				"     partitionBy('hash', 1)) ~> derivedColumn2",
 				"derivedColumn2 select(mapColumn(",
 				"          EMPLOYEE_ID,",
