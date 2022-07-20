@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow1",
+						"referenceName": "DataCleaning",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "powerquery1",
+						"referenceName": "DataCleaning",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -92,7 +92,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow3",
+						"referenceName": "HeadCountMetric",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -123,7 +123,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow2",
+						"referenceName": "MovementMetric",
 						"type": "DataFlowReference"
 					},
 					"compute": {
