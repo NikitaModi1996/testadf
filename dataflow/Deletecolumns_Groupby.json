@@ -1,5 +1,5 @@
 {
-	"name": "DataCleaning",
+	"name": "Deletecolumns_Groupby",
 	"properties": {
 		"type": "WranglingDataFlow",
 		"typeProperties": {
