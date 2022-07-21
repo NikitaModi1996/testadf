@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "DataCleaning",
+				"description": "Data flow to join employee info table with event table to get the movement, perform data cleaning",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -28,6 +29,7 @@
 			},
 			{
 				"name": "Deletecolumns_Groupby",
+				"description": "Power-Query to delete columns which are not required, group by employeeID & date",
 				"type": "ExecuteWranglingDataflow",
 				"dependsOn": [
 					{
@@ -38,7 +40,7 @@
 					}
 				],
 				"policy": {
-					"timeout": "1.00:00:00",
+					"timeout": "",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
