@@ -43,13 +43,15 @@
 					"description": "Creates an explicit mapping for each drifted column"
 				},
 				{
-					"name": "duplicate"
+					"name": "duplicate",
+					"description": "Delete duplicate rows"
 				},
 				{
 					"name": "derivedColumn1"
 				},
 				{
-					"name": "sort1"
+					"name": "sort1",
+					"description": "Sort the data based on employeeID & date to get better preview of data"
 				}
 			],
 			"scriptLines": [

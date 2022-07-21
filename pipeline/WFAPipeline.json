@@ -4,7 +4,7 @@
 		"activities": [
 			{
 				"name": "DataCleaning",
-				"description": "Data flow to join employee info table with event table to get the movement, perform data cleaning",
+				"description": "Data flow to join employee info table with picklist table to get the movement type, perform data cleaning",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
