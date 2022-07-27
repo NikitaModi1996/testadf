@@ -9,14 +9,14 @@
 						"referenceName": "JOB_INFO_T",
 						"type": "DatasetReference"
 					},
-					"name": "source11"
+					"name": "JobINFO"
 				},
 				{
 					"dataset": {
 						"referenceName": "Picklist",
 						"type": "DatasetReference"
 					},
-					"name": "source21"
+					"name": "Picklist"
 				}
 			],
 			"sinks": [
@@ -93,7 +93,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source11",
+				"     ignoreNoFilesFound: false) ~> JobINFO",
 				"source(output(",
 				"          OPTIONID as string,",
 				"          PICKLISTID as string,",
@@ -104,8 +104,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source21",
-				"source11, source21 join(EVENT == OPTIONID,",
+				"     ignoreNoFilesFound: false) ~> Picklist",
+				"JobINFO, Picklist join(EVENT == OPTIONID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
