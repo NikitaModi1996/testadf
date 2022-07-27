@@ -9,7 +9,7 @@
 						"referenceName": "Powerq",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "Powerquery"
 				},
 				{
 					"dataset": {
@@ -82,7 +82,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> source1",
+				"     ignoreNoFilesFound: false) ~> Powerquery",
 				"source(output(",
 				"          OBJECT_ID as string,",
 				"          INTERNAL_CODE as string,",
@@ -97,7 +97,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source2",
-				"source1, source2 join(EVENT_REASON_ICODE == INTERNAL_CODE,",
+				"Powerquery, source2 join(EVENT_REASON_ICODE == INTERNAL_CODE,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -107,8 +107,8 @@
 				"EXTERNAL_CODE == '26', 'Termination', ' ')) ~> MovementType",
 				"MapDrifted1 select(mapColumn(",
 				"          EMPLOYEE_ID,",
-				"          EFFECTIVE_START_DATE = source1@EFFECTIVE_START_DATE,",
-				"          EFFECTIVE_END_DATE = source1@EFFECTIVE_END_DATE,",
+				"          EFFECTIVE_START_DATE = Powerquery@EFFECTIVE_START_DATE,",
+				"          EFFECTIVE_END_DATE = Powerquery@EFFECTIVE_END_DATE,",
 				"          {Movement Type} = EXTERNAL_CODE,",
 				"          {Movement Reason Type} = OBJECT_NAME,",
 				"          JOB_TITLE,",

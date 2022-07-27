@@ -27,7 +27,7 @@
 					"description": "Creates an explicit mapping for each drifted column"
 				},
 				{
-					"name": "derivedColumn1",
+					"name": "HireDateCalculation",
 					"description": "Create Hire date column "
 				},
 				{
@@ -54,7 +54,7 @@
 					"description": "Avg Hc Calculation"
 				},
 				{
-					"name": "derivedColumn2",
+					"name": "MonthYear",
 					"description": "Add Month-Year column"
 				},
 				{
@@ -114,8 +114,8 @@
 				"source1 derive({Movement Type} = toString(byName('Movement Type')),",
 				"          {Movement Reason Type} = toString(byName('Movement Reason Type')),",
 				"     partitionBy('hash', 1)) ~> MapDrifted1",
-				"MapDrifted1 derive({Hire Date} = EFFECTIVE_START_DATE) ~> derivedColumn1",
-				"derivedColumn1 derive({Hire Date} = case({Movement Type}==\"Hire\",EFFECTIVE_START_DATE,toString(null()))) ~> HireDate",
+				"MapDrifted1 derive({Hire Date} = EFFECTIVE_START_DATE) ~> HireDateCalculation",
+				"HireDateCalculation derive({Hire Date} = case({Movement Type}==\"Hire\",EFFECTIVE_START_DATE,toString(null()))) ~> HireDate",
 				"HireDate window(over(EMPLOYEE_ID),",
 				"     asc(EMPLOYEE_ID, true),",
 				"     {Hire Date} = last({Hire Date}, true())) ~> window1",
@@ -129,8 +129,8 @@
 				"dayOfMonth(toDate(EFFECTIVE_START_DATE))-dayOfMonth(toDate(EFFECTIVE_END_DATE)))+\r",
 				"dayOfMonth(lastDayOfMonth(toDate(EFFECTIVE_START_DATE)))+dayOfMonth(lastDayOfMonth(toDate(EFFECTIVE_END_DATE)))))) ~> AvgHc",
 				"AvgHc derive(Month = toString(toDate(EFFECTIVE_START_DATE),\"MMMM-YYYY\"),",
-				"     partitionBy('hash', 1)) ~> derivedColumn2",
-				"derivedColumn2 select(mapColumn(",
+				"     partitionBy('hash', 1)) ~> MonthYear",
+				"MonthYear select(mapColumn(",
 				"          EMPLOYEE_ID,",
 				"          JOB_TITLE,",
 				"          EFFECTIVE_START_DATE,",
